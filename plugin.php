@@ -446,7 +446,7 @@
 		 */
 		public	function	panelHome() {
 			//Load the panel matching the home slug.
-			panel('FrozenPlugin-home');
+			self::panel('FrozenPlugin-home');
 		}
 		
 		/**
@@ -454,7 +454,7 @@
 		 */
 		public	function	panelSettings() {
 			//Load the panel matching the settings slug.
-			panel('FrozenPlugin-settings');
+			self::panel('FrozenPlugin-settings');
 		}
 		
 		/**
