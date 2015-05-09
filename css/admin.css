@@ -4,3 +4,9 @@
  * Copyright: 2015 PxO Ink. Some rights reserved. 
  * License: MIT
  */
+ 
+.wrap h2.dashicons-before {
+	width: 28px;
+	height: 28px;
+	font-size: 28px;
+}

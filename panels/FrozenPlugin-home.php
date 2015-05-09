@@ -1,7 +1,6 @@
 	<div class="wrap">
 		<?php $this -> notices -> output(); ?>
-		<h2>
-			<span class="dashicons dashicons-palmtree"></span>
+		<h2 class="dashicons-before dashicons-palmtree">
 			FrozenPlugin
 		</h2>
 		<hr />

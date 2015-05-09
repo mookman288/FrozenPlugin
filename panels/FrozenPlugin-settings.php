@@ -1,7 +1,6 @@
 	<div class="wrap">
 		<?php $this -> notices -> output(); ?>
-		<h2>
-			<span class="dashicons dashicons-admin-settings"></span>
+		<h2 class="dashicons-before dashicons-admin-settings">
 			Settings
 		</h2>
 		<hr />
