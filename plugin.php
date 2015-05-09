@@ -82,44 +82,8 @@
 			//Declare requirements.
 			require_once(ABSPATH . 'wp-includes/pluggable.php');
 			
-			/**
-			 * Handle filters here.
-			 */
-			
-			//Add a filter to run meta content for the plugin.
-			add_filter('plugin_row_meta', array($this, 'meta'), 10, 2);
-			
-			/**
-			 * Handle hooks here.
-			 */
-			
-			//Register an activation hook to install. 
-			register_activation_hook(__FILE__, array($this, 'install'));
-			
-			//Register an activation hook to uninstall.
-			register_activation_hook(__FILE__, array($this, 'uninstall'));
-			
-			/**
-			 * Handle actions here.
-			 */
-			
-			//If this is not a network admin install.
-			if (!is_multisite()) {
-				//Add an action to implement the administrative menues.
-				add_action('admin_menu', array($this, 'adminMenues'));
-			} else {
-				//Add an action to implement the network administrative menues.
-				add_action('network_admin_menu', array($this, 'adminMenues'));
-			}
-			
-			//If the user is not logged into the administration panel.
-			if (!is_admin()) {
-				//Add an action to load site related content.
-				add_action('after_setup_theme', array($this, 'enqueueSite'), 18);
-			} else {
-				//Add an action to load admin area related content. 
-				add_action('admin_print_styles-' . $this -> page, array($this, 'enqueueAdmin'));
-			}
+			//Run all actions, filters, and hooks necessary for this plugin on load.
+			self::actionsFiltersHooks();
 			
 			/**
 			 * Run initial logic.
@@ -157,6 +121,47 @@
 			/**
 			 * Handle destruction here. 
 			 */
+		}
+		
+		/**
+		 * Handle all actions, filters, and hooks here. 
+		 */
+		public	function	actionsFiltersHooks() {
+			/**
+			 * Handle actions here.
+			 */
+			
+			//If this is not a network admin install.
+			if (!is_multisite()) {
+				//Add an action to implement the administrative menues.
+				add_action('admin_menu', array($this, 'adminMenues'));
+			} else {
+				//Add an action to implement the network administrative menues.
+				add_action('network_admin_menu', array($this, 'adminMenues'));
+			}
+			
+			//If the user is not logged into the administration panel.
+			if (!is_admin()) {
+				//Add an action to load site related content.
+				add_action('after_setup_theme', array($this, 'enqueueSite'), 18);
+			}
+			
+			/**
+			 * Handle filters here.
+			 */
+				
+			//Add a filter to run meta content for the plugin.
+			add_filter('plugin_row_meta', array($this, 'meta'), 10, 2);
+				
+			/**
+			 * Handle hooks here.
+			*/
+				
+			//Register an activation hook to install.
+			register_activation_hook(__FILE__, array($this, 'install'));
+				
+			//Register an activation hook to uninstall.
+			register_activation_hook(__FILE__, array($this, 'uninstall'));
 		}
 		
 		/**
@@ -203,14 +208,19 @@
 					);
 			
 			/**
-			 * Actions, hooks, and filters go here.
+			 * Actions, filters, and hooks that rely on the current page go here. 
 			 */
 			
 			//For each page.
 			foreach($this -> pages as $page) {
 				//Add an action to load the help page.
-				add_action(sprintf("load-$page"), array($this, 'helpMenu'));
+				add_action("load-$page", array($this, 'helpMenu'));
+				
+				//Add an action to load admin area related content.
+				add_action("admin_print_styles-$page", array($this, 'enqueueAdmin'));
 			}
+			
+			
 		}
 		
 		/**
@@ -250,17 +260,17 @@
 			 */
 			
 			//Enqueue Farbtastic. 
-			admin_enqueue_script('farbtastic');
+			wp_enqueue_script('farbtastic');
 			
 			//Enqueue ThickBox. 
-			admin_enqueue_script('thickbox');
+			wp_enqueue_script('thickbox');
 			
 			//Enqueue Media Uploads.
 			wp_enqueue_media();
 			//admin_enqueue_script('media-upload');
 			
 			//Enqueue the administrative JS. 
-			admin_enqueue_script('FrozenPlugin-admin-js');
+			wp_enqueue_script('FrozenPlugin-admin-js');
 		}
 		
 		/**
@@ -657,7 +667,7 @@
 					return ob_get_clean();
 				} else {
 					//Print the output.
-					print($output);
+					print(ob_get_clean());
 				}
 			}
 			

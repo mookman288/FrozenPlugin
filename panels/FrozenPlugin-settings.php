@@ -1,10 +1,10 @@
 	<div class="wrap">
-		<?php $this -> notices -> output(); ?>
 		<h2 class="dashicons-before dashicons-admin-settings">
 			Settings
 		</h2>
 		<hr />
-		<div id="post-body-content">
+		<div class="plugin-left">
+			<?php $this -> notices -> output(); ?>
 			<h3>Application Settings</h3>
 			<form id="save-FrozenPlugin-options" method="post" 
 			action="<?php print($_SERVER['REQUEST_URI']); ?>">
@@ -41,8 +41,8 @@
 								?>" />
 							</td>
 							<td>
-								<span data-color-picker data-target="#color" 
-								class="dashicons dashicons-art"></span>
+								<a href="javascript:void(0)" data-color-picker data-target="#color" 
+								class="dashicons dashicons-art"></a>
 							</td>
 						</tr>
 						<tr>
@@ -63,7 +63,7 @@
 								<button id="image-upload-button" 
 								class="button button-secondary" data-media-upload 
 								data-target="#image-upload">
-									<span class="dashicons dashicons-admin-media"></span>
+									<span class="wp-media-buttons-icon"></span>
 									Choose/Upload Media
 								</button>
 							</td>

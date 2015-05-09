@@ -1,10 +1,10 @@
 	<div class="wrap">
-		<?php $this -> notices -> output(); ?>
 		<h2 class="dashicons-before dashicons-palmtree">
 			FrozenPlugin
 		</h2>
 		<hr />
-		<div id="post-body-content">
+		<div class="plugin-left">
+			<?php $this -> notices -> output(); ?>
 			<p>
 				The README included with this development plugin is designed to explain how the system 
 				works. While the code is commented and outlines the majority of what can be done, the 
@@ -17,16 +17,18 @@
 				restriction is your imagination. Good luck!
 			</p>
 		</div>
-		<div class="postbox-container">
-			<div class="meta-box-sortables ui-sortable">
-				<div class="postbox">
-					<h3 class="hndle ui-sortable-handle">
-						Support
-					</h3>
-					<div class="inside">
-						<p class="howto">
-							Look up toward the upper-right for a "Help" button!
-						</p>
+		<div class="plugin-right">
+			<div class="postbox-container">
+				<div class="meta-box-sortables ui-sortable">
+					<div class="postbox">
+						<h3 class="hndle ui-sortable-handle">
+							Support
+						</h3>
+						<div class="inside">
+							<p class="howto">
+								Look up toward the upper-right for a "Help" button!
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
