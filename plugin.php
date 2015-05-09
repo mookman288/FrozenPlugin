@@ -353,13 +353,16 @@
 			if (count($entries) > 0) {
 				//For each of the menu tabs.
 				foreach ($entries as $key => $entry) {
+					//Set the filename.
+					$filename	=	sprintf("%sdoc/$entry", plugin_dir_path(__FILE__));
+					
 					//If there is an entry.
-					if ($entry) {
+					if ($entry && file_exists($filename)) {
 						//Get the pieces of the filename. 
 						$pieces			=	explode('.', $document);
 						
 						//Get the contents.
-						$contents		=	file_get_contents(plugin_dir_path(__FILE__) . "doc/$entry");
+						$contents		=	file_get_contents($filename);
 						
 						//Add the help tab.
 						$screen -> add_help_tab(array(
