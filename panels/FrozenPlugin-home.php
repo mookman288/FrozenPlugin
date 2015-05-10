@@ -26,7 +26,7 @@
 						</h3>
 						<div class="inside">
 							<p class="howto">
-								Look up toward the upper-right for a "Help" button!
+								Look toward the upper-right for a "Help" button!
 							</p>
 						</div>
 					</div>
