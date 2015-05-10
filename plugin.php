@@ -309,10 +309,9 @@
 		/**
 		 * Provides a contextual help menu in htm format.
 		 */
-		public 	function	helpMenu() {
+		public 	function	helpMenu() { 
 			//Declare variables.
 			$entries			=	array();
-			$screen				=	get_current_screen();
 			
 			//Depending upon the type of directory reading function available. 
 			if (!function_exists('glob') && !function_exists('scandir')) {
@@ -321,8 +320,8 @@
 				
 				//While there are entries to read.
 				while (($entry = readdir($handle)) !== false) {
-					//If the file is an htm file.
-					if (strpos($entry, '.htm') !== false) {
+					//If the file is a PHP file.
+					if (strpos($entry, '.php') !== false) {
 						//Increment entries.
 						$entries[]	=	$entry;
 					}
@@ -331,8 +330,8 @@
 				//Close the directory.
 				closedir($handle);
 			} elseif (function_exists('glob')) {
-				//Find all htm files using glob.
-				$files			=	glob(sprintf("%s/doc/*.htm", dirname(__FILE__)));
+				//Find all php files using glob.
+				$files			=	glob(sprintf("%s/doc/*.php", dirname(__FILE__)));
 				
 				//If the files are an array.
 				if (is_array($files)) {
@@ -350,8 +349,8 @@
 				if (is_array($files)) {
 					//For each file.
 					foreach($files as $entry) {
-						//If the file is an htm file.
-						if (strpos($entry, '.htm') !== false) {
+						//If the file is a PHP file.
+						if (strpos($entry, '.php') !== false) {
 							//Increment entries.
 							$entries[]	=	$entry;
 						}
@@ -363,22 +362,28 @@
 			if (count($entries) > 0) {
 				//For each of the menu tabs.
 				foreach ($entries as $key => $entry) {
+					//Get the basename.
+					$entry		=	basename($entry);
+					
 					//Set the filename.
 					$filename	=	sprintf("%sdoc/$entry", plugin_dir_path(__FILE__));
 					
-					//If there is an entry.
-					if ($entry && file_exists($filename)) {
+					//If there is an entry, and the file exists.
+					if ($entry && file_exists($filename)) { 
 						//Get the pieces of the filename. 
-						$pieces			=	explode('.', $document);
+						$pieces			=	explode('.', $entry);
 						
-						//Get the contents.
-						$contents		=	file_get_contents($filename);
+						//Start the output buffer.
+						ob_start();
+						
+						//Include the PHP file for rendering.
+						include_once($filename);
 						
 						//Add the help tab.
-						$screen -> add_help_tab(array(
+						get_current_screen() -> add_help_tab(array(
 								'id' => "FrozenPlugin-help-$key",
 								'title' => ucwords(__(str_replace('-', ' ', $pieces[0]))),
-								'content' => $contents
+								'content' => ob_get_clean()
 						));
 					}
 				}
