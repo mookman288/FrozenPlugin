@@ -8,6 +8,18 @@
 
 //Upon document load.
 jQuery(document).ready(function() {
+	//Avoid bubbling on click of slide toggle targeters. 
+	jQuery('.wrap').on('click', '*[data-slide]', function(e) {
+		//Prevent default.
+		e.preventDefault();
+		
+		//Toggle the element being targeted. 
+		jQuery(jQuery(this).data('target')).slideToggle();
+		
+		//Return false.
+		return false;
+	});
+	
 	//If the media editor has been included. 
 	if (typeof wp !== 'undefined' && wp.media && wp.media.editor) {
 		//Avoid bubbling on click of the media uploader.
@@ -27,12 +39,25 @@ jQuery(document).ready(function() {
 
 			//Open the modal bound to a unique ID. 
 			wp.media.editor.open($target.attr('id'));
+			
+			//Return false.
+			return false;
 		});
 	}
 	
 	//For each color picker. 
 	jQuery('*[data-color-picker]').each(function() {
+		//Declare variables.
+		var	$this	=	jQuery(this);
+		var	$target	=	jQuery($this.data('target'));
+		
 		//Initiate Farbtastic color picker.
-		jQuery(this).farbtastic(jQuery(this).data('target'));
+		$this.farbtastic(function(color) {
+			//Change the value.
+			$target.val(color);
+			
+			//Set the background color of the parent. 
+			$target.parent().css('background-color', color);
+		});
 	});
 });

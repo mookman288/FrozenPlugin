@@ -4,9 +4,49 @@
  * Copyright: 2015 PxO Ink. Some rights reserved. 
  * License: MIT
  */
+
+a.dashicons-before:before {
+	text-decoration: none;
+}
+
+.plugin-left {
+	float: left;
+	margin-right: 2.00%;
+	width: 58.00%;
+}
+	
+.plugin-right {
+	float: left;
+	width: 28.00%;
+}
  
 .wrap h2.dashicons-before:before {
 	width: 28px;
 	height: 28px;
 	font-size: 28px;
+}
+
+.color-picker {
+	display: none;
+}
+
+/* Responsive Design */
+
+@media all and (max-width: 1024px) {
+	.plugin-left {
+		margin: 0.00%;
+		width: 58.00%;
+	}
+	
+	.plugin-right {
+		float: right;
+		width: 40.00%;
+	}
+}
+
+@media all and (max-width: 640px) {
+	.plugin-left, .plugin-right {
+		margin: 1.00%;
+		width: 98.00%;
+		}
 }

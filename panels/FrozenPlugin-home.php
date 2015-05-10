@@ -1,4 +1,4 @@
-	<div class="wrap">
+	<div id="poststuff" class="wrap">
 		<h2 class="dashicons-before dashicons-palmtree">
 			FrozenPlugin
 		</h2>

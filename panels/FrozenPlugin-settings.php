@@ -1,4 +1,4 @@
-	<div class="wrap">
+	<div id="poststuff" class="wrap">
 		<h2 class="dashicons-before dashicons-admin-settings">
 			Settings
 		</h2>
@@ -25,7 +25,8 @@
 							</td>
 							<td>
 								<?php wp_nonce_field($uniqid, 'nonce'); ?>
-								<input type="hidden" name="uniqid" value="<?php print($uniqid); ?>" />
+								<input type="hidden" name="uniqid" 
+								value="<?php print($uniqid); ?>" />
 							</td>
 						</tr>
 					</tfoot>
@@ -35,24 +36,33 @@
 								<label for="color">Color Picker</label>
 							</td>
 							<td>
-								<input id="color" type="text" size="6" name="options[optional][color]" 
+								<input id="color" type="text" size="6" 
+								name="options[optional][color]" 
 								value="<?php 
 									print(esc_attr($this -> options['optional']['color'])); 
 								?>" />
 							</td>
 							<td>
-								<a href="javascript:void(0)" data-color-picker data-target="#color" 
-								class="dashicons dashicons-art"></a>
+								<p class="dashicons-before dashicons-art">
+									<a href="javascript:void()" data-slide 
+									data-target="#color-picker">
+										Toggle Color Picker
+									</a>
+								</p>
+								<div id="color-picker" class="color-picker" 
+								data-color-picker data-target="#color">
+								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>
 								<label for="image-upload">
-									Image Upload using Media Manager
+									Image Selection Using Media Manager
 								</label>
 							</td>
 							<td>
-								<input id="image-upload" type="text" name="options[optional][image]" 
+								<input id="image-upload" type="text" 
+								name="options[optional][image]" 
 								value="<?php 
 									print(esc_attr($this -> options['optional']['image'])); 
 								?>" 
@@ -61,9 +71,8 @@
 							</td>
 							<td>
 								<button id="image-upload-button" 
-								class="button button-secondary" data-media-upload 
-								data-target="#image-upload">
-									<span class="wp-media-buttons-icon"></span>
+								class="button button-secondary dashicons-before dashicons-media" 
+								data-media-upload data-target="#image-upload">
 									Choose/Upload Media
 								</button>
 							</td>
